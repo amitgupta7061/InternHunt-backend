@@ -2,7 +2,7 @@ import axios from "axios";
 import * as cheerio from "cheerio";
 
 export async function scrapeInternshala() {
-  const baseUrl = "https://internshala.com/internships/full-stack-development-internship/";
+  const baseUrl = "https://internshala.com/internships/android-app-development,angular-js-development,artificial-intelligence-ai,backend-development,blockchain-development,cloud-computing,cyber-security,front-end-development,full-stack-development,java-internship/";
   const { data } = await axios.get(baseUrl);
   const $ = cheerio.load(data);
   const jobs = [];
