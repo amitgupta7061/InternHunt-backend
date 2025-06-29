@@ -7,7 +7,13 @@ const router = express.Router();
 router.get("/scrape", async (req, res) => {
   try {
     const jobs = await scrapeInternshala();
-    await Job.insertMany(jobs);
+    for (const job of jobs) {
+        await Job.updateOne(
+          { link: job.link },
+          { $setOnInsert: job },
+          { upsert: true }       
+        );
+    }
     res.json({ success: true, count: jobs.length });
   } catch (err) {
     res.status(500).json({ error: err.message });
